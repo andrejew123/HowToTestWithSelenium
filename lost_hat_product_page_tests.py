@@ -1,20 +1,11 @@
-import unittest
-from selenium import  webdriver
-from helpers import functional_helpers as fh
 from helpers.wrappers import screenshot_decorator
+from helpers.base_test_class import BaseTestClass
 
-class LostHatProductPage(unittest.TestCase):
-
-    @classmethod
-    def setUp(self):
-        self.base_url = 'https://autodemo.testoneo.com/en/'
-        self.login_url = self.base_url + 'login'
-        self.sample_product_url = self.base_url + 'men/1-1-hummingbird-printed-t-shirt.html'
-        self.driver = webdriver.Chrome(executable_path=r'C:\Users\andrejew\PycharmProjects\chromedriver')
+class LostHatProductPage(BaseTestClass):
 
     @screenshot_decorator
     def test_checking_tshirt_name(self):
-        driver = self.driver
+        driver = self.ef_driver
         driver.get(self.sample_product_url)
         xpath = '//*[@ class = "h1"]'
         expected_text = 'HUMMINGBIRD PRINTED T-SHIRT'
@@ -22,7 +13,7 @@ class LostHatProductPage(unittest.TestCase):
 
     @screenshot_decorator
     def test_check_product_price(self):
-        driver = self.driver
+        driver = self.ef_driver
         driver.get(self.sample_product_url)
         xpath = '//*[contains(text(), "PLN23.52")]'
         expected_text = 'PLN23.52'
@@ -39,7 +30,3 @@ class LostHatProductPage(unittest.TestCase):
         element_text = element.text
         self.assertEqual(expected_text, element_text,
                          f'Expected result differ from actual on page {driver.current_url}')
-
-    @classmethod
-    def tearDown(self):
-        self.driver.quit()

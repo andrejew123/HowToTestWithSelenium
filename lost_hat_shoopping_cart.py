@@ -1,29 +1,13 @@
-import unittest
-from selenium import webdriver
 from helpers import operational_helpers as oh
-from selenium.webdriver.support.events import EventFiringWebDriver
-from helpers.screenshot_listener import ScreenshotListener
 from helpers.wrappers import screenshot_decorator
+from helpers.base_test_class import BaseTestClass
 
-class LostHatShoppingCart(unittest.TestCase):
+class LostHatShoppingCart(BaseTestClass):
 
     @classmethod
     def setUp(self):
-        driver = webdriver.Chrome(executable_path=r'C:\Users\andrejew\PycharmProjects\chromedriver')
-        self.art_url = 'https://autodemo.testoneo.com/en/9-art'
-        self.ef_driver = EventFiringWebDriver(driver, ScreenshotListener())
-
+        super().setUp()
         self.ef_driver.implicitly_wait(10)
-
-    @classmethod
-    def tearDown(self):
-        self.ef_driver.quit()
-
-    def setUpClass():
-        pass
-
-    def tearDownClass():
-        pass
 
     # def get_page_driver(self, url):
     #     driver = self.driver
@@ -46,7 +30,7 @@ class LostHatShoppingCart(unittest.TestCase):
         # confirmation_modal_element = WebDriverWait(driver, 10).until(
         #     EC.visibility_of_element_located((By.XPATH, xpath_modal_element)),
         #     f'Element for xpath: {xpath_modal_element} and url {driver.current_url} not found')
-        confirmation_modal_element = oh.visibility_of_element_wait(driver, xpath_modal_element, 1)
+        confirmation_modal_element = oh.visibility_of_element_wait(driver, xpath_modal_element)
         self.assertIn(expected_modal_element_text, confirmation_modal_element.text,
                       f'Expected text differ than acctual for page {driver.current_url} and in \
                         {confirmation_modal_element.text}')
