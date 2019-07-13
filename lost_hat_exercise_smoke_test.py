@@ -12,6 +12,7 @@ class SmokeTestForSearrchBox(unittest.TestCase):
         self.base_url = 'https://autodemo.testoneo.com/en/'
         self.xpath_search_box = '//*[@class = "ui-autocomplete-input"]'
         self.ef_driver = EventFiringWebDriver(driver, ScreenshotListener())
+
     @classmethod
     def tearDownClass(self):
         self.ef_driver.quit()
@@ -25,11 +26,11 @@ class SmokeTestForSearrchBox(unittest.TestCase):
         search_box.send_keys(search_phase)
         search_box.send_keys(Keys.ENTER)
         mugs_products = driver.find_elements_by_xpath('//*[contains(@class, "product-miniature")]')
-        self.assertLess(expected_value, len(mugs_products), f'Counter of mugs differ than expected for page {driver.current_url}')
+        self.assertLess(expected_value, len(mugs_products), f'Counter of mugs differ than expected for page \ '
+        f'{driver.current_url}')
         time.sleep(2)
 
     def test_sanity_search_box(self):
-        # driver = self.driver
         self.ef_driver.get(self.base_url)
         search_box = self.ef_driver.find_element_by_xpath('//*[@name="s"]')
         search_box.send_keys('Hummingbird')

@@ -20,12 +20,12 @@ class LostHatFrontPAgeTests(BaseTestClass):
             actual_slider_width = slider_element.size['width']
             with self.subTest('Element heights'):
                 self.assertLess(expected_min_height, actual_slider_height,
-                                f'Element height found by xpath {slider_xpath} on page {driver.current_url} is smaller then \
-                                expected {expected_min_height}')
+                                f'Element height found by xpath {slider_xpath} on page {driver.current_url} is smaller\ '
+                                f'then expected {expected_min_height}')
             with self.subTest('Element width'):
                 self.assertLess(expected_min_width, actual_slider_width,
-                                f'Element width found bby xpatf {slider_xpath} on page {driver.current_url}is smaller then \
-                                expected {expected_min_width}')
+                                f'Element width found bby xpatf {slider_xpath} on page {driver.current_url}is smaller\ '
+                                f' then expected {expected_min_width}')
 
             sliders_elements = driver.find_elements_by_xpath('//*[contains(@ class,"carousel-item")]')
             actual_number_of_sliders = len(sliders_elements)
@@ -38,11 +38,6 @@ class LostHatFrontPAgeTests(BaseTestClass):
         driver.get(self.url_base)
         sliders_titles_xpath = driver.find_elements_by_xpath(
             '//*[@id="carousel"]/ul/li//*[contains(@class, "text-uppercase")]')
-        # for title_element in sliders_titles_xpath:
-        #     # if (title_element.get_attribute("textContent")).lower() == 'sample':
-        #     print(f'Text: {title_element.get_attribute("textContent")}')
-
-        # title_elements_text = title_element.get_attribute("textContent")
         for title_element in sliders_titles_xpath:
             with self.subTest(title_element):
                 title_element_text = title_element.get_attribute('textContent')
