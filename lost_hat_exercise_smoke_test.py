@@ -26,8 +26,11 @@ class SmokeTestForSearrchBox(unittest.TestCase):
         search_box.send_keys(search_phase)
         search_box.send_keys(Keys.ENTER)
         mugs_products = driver.find_elements_by_xpath('//*[contains(@class, "product-miniature")]')
-        self.assertLess(expected_value, len(mugs_products), f'Counter of mugs differ than expected for page \ '
-        f'{driver.current_url}')
+        self.assertLess(
+            expected_value,
+            len(mugs_products),
+            f'Counter of mugs differ than expected for page {driver.current_url}'
+        )
         time.sleep(2)
 
     def test_sanity_search_box(self):
@@ -40,4 +43,8 @@ class SmokeTestForSearrchBox(unittest.TestCase):
         for element in tshirt_product:
             if 'Hummingbird' in element.text:
                 found_elements += 1
-        self.assertEqual(5, found_elements, f'We expect 1 and actual number of found element item is 1')
+        self.assertEqual(
+            5,
+            found_elements,
+            f'We expect 1 and actual number of found element item is 1'
+        )

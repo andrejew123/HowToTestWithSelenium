@@ -1,23 +1,13 @@
 import unittest
-# from selenium import webdriver
-# from helpers.wrappers import screenshot_decorator
-import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.events import EventFiringWebDriver
-from helpers.screenshot_listener import ScreenshotListener
 from helpers.wrappers import screenshot_decorator
 from helpers.screenshot_listener import ScreenshotListener
 
 class LostHatSmokeTests(unittest.TestCase):
-
-    @classmethod
-    def setUp(self):
-        pass
     @classmethod
     def setUpClass(self):
-        # self.driver = webdriver.Chrome(executable_path=r'C:\Users\andrejew\PycharmProjects\chromedriver')
-        # self.base_url = 'https://autodemo.testoneo.com/en/'
         self.base_url = 'https://autodemo.testoneo.com/en/'
         self.login_url = self.base_url + 'login'
         self.clothes_product_url = self.base_url + '3-clothes'
@@ -26,9 +16,6 @@ class LostHatSmokeTests(unittest.TestCase):
         driver = webdriver.Chrome(executable_path=r"C:\Users\andrejew\PycharmProjects\chromedriver")
         self.ef_driver = EventFiringWebDriver(driver, ScreenshotListener())
 
-    @classmethod
-    def tearDown(self):
-        pass
     @classmethod
     def tearDownClass(self):
         self.ef_driver.quit()
@@ -71,11 +58,18 @@ class LostHatSmokeTests(unittest.TestCase):
         search_input_element.send_keys(search_phase)
         search_input_element.send_keys(Keys.ENTER)
         result_elements = self.ef_driver.find_elements_by_xpath(result_element_xpath)
-        self.assertGreaterEqual(len(result_elements), minimum_expected_elements,
-                                f'Actual number of elements found: \
-                                {len(result_elements)}; expected was {minimum_expected_elements} or more')
+        self.assertGreaterEqual(
+            len(result_elements),
+            minimum_expected_elements,
+            f'Actual number of elements found: {len(result_elements)}; \ '
+            f'expected was {minimum_expected_elements} or more'
+        )
 
     def assert_title(self, url, expected_title):
         actual_title = self.get_page_title(url)
-        self.assertEqual(expected_title, actual_title, f'Result differ than expected for page {url}')
+        self.assertEqual(
+            expected_title,
+            actual_title,
+            f'Result differ than expected for page {url}'
+        )
 

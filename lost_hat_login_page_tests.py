@@ -52,16 +52,6 @@ class LostHatLoginPageTests(BaseTestClass):
         fh.user_login(driver, fake_user_name, fake_user_password)
         self.assert_element_text(driver, xpath, expected_text)
 
-    # def user_login(self, driver, user_email, user_password):
-    #     login_input_element = driver.find_element_by_xpath('//*[@type ="email"]')
-    #     login_input_element.send_keys(user_email)
-    #
-    #     login_input_element = driver.find_element_by_xpath('//*[@type = "password"]')
-    #     login_input_element.send_keys(user_password)
-    #
-    #     submmit_button = driver.find_element_by_xpath('//*[@ id = "submit-login"]')
-    #     submmit_button.click()
-
     def assert_element_text(self, driver, xpath, expected_text):
         """Comparing expected text with observed value from web element
 
@@ -71,8 +61,10 @@ class LostHatLoginPageTests(BaseTestClass):
         """
         element = driver.find_element_by_xpath(xpath)
         element_text = element.text
-        self.assertEqual(expected_text, element_text,
-                         f'Expected result differ from actual on page {driver.current_url}')
+        self.assertEqual(
+            expected_text,
+            element_text,
+            f'Expected result differ from actual on page {driver.current_url}')
 
     @classmethod
     def tearDown(self):

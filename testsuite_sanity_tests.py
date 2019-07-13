@@ -1,6 +1,5 @@
 import unittest
 from lost_hat_login_page_tests import LostHatLoginPageTests
-from unittest.loader import makeSuite
 
 def sanity_test():
     test_suite = unittest.TestSuite()
